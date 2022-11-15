@@ -1,0 +1,29 @@
+class Solution {
+    Integer dp[][];
+    int find(int r,int k,List<List<Integer>>piles)
+    {
+        if(k==0)
+            return 0;
+        
+        if(r==piles.size())
+            return 0;
+        if(dp[r][k]!=null)
+            return dp[r][k];
+        int curr=0,res=find(r+1,k,piles);
+        for(int j=0;j<Math.min(piles.get(r).size(),k);j++)
+        {
+            curr+=piles.get(r).get(j);
+            res = Math.max(curr+find(r+1,k-j-1,piles),res);
+        }
+        
+        return dp[r][k]=res;
+            
+            
+    }
+    public int maxValueOfCoins(List<List<Integer>> piles, int k) {
+        int n = piles.size();
+        dp = new Integer[n][k+1];
+        
+        return find(0,k,piles);
+    }
+}
