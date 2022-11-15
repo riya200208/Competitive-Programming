@@ -1,0 +1,48 @@
+class segmentTree
+{
+    
+    int seg[];
+    segmentTree(int n)
+    {
+       seg = new int[4*n];
+    }
+    //Building of Segment Tree
+    public void build(int ind,int low,int high,int nums[])
+    {
+        if(low==high){
+             seg[ind]=nums[low];
+            return;
+        }
+        int mid = (high+low)/2;
+        build(2*ind+1,low,mid,nums);
+        build(2*ind+2,mid+1,high,nums);
+        seg[ind]=seg[2*ind+1]+seg[2*ind + 2];
+    }
+    //Point Update
+     public void update(int indexToChange, int newVal, int currInd, int low,int high) {
+        if(low==high && indexToChange== low)
+        {
+            seg[ind]=newVal;
+            return;
+        }
+         if(low > indexToChange || high  < indexToChange)
+             return;
+         
+        int mid = low + (high-low)/2;
+        update(indexToChange, newVal, 2*ind + 1, low, mid);
+        update(indexToChange, newVal, 2*ind+2, mid+1, high);
+        seg[ind]=seg[2*ind+1]+seg[2*ind + 2];
+    }
+    //Sum for a range
+    public int sumRange(int leftRange, int rightRange, int currind, int low, int high) {
+        if(low > rightRange || high < leftRange)
+            return 0;
+        if(low >= leftRange && high <= rightRange)
+            return seg[ind];
+        int mid = low + (high-low)/2;
+        int l = sumRange(leftRange, rightRange, 2*ind+1, low, mid);
+        int r = sumRange(leftRange, rightRange, 2*ind+2, mid+1, high);
+       return l+r;
+    }
+    
+}
