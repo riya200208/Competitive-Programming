@@ -1,0 +1,21 @@
+public int minimumDeviation(int[] nums) {
+        int ans=Integer.MAX_VALUE,n = nums.length;
+        PriorityQueue<Integer>pq = new PriorityQueue<Integer>((a,b)->b-a);
+        int minm=nums[0]*2;
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]%2 > 0)
+                nums[i]*=2;
+            minm = Math.min(minm,nums[i]);
+            pq.add(nums[i]);
+        }
+        while(!pq.isEmpty() && (pq.peek()%2 == 0))
+        {
+            int temp = pq.poll();
+            minm = Math.min(minm,temp/2);
+            pq.add(temp/2);
+            ans = Math.min(ans,pq.peek()-minm);
+            
+        }
+        return ans;
+    }
