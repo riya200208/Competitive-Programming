@@ -1,0 +1,12 @@
+//Link: https://codeforces.com/contest/1806/problem/C
+
+Cases that can occur:
+
+n is the size of array
+To make sum of k numbers = product of left n-k numbers from an array
+
+1. make all the element as 0
+2. for 4 numbers [2 2 2 2] is one possibility
+3. for n divisible by 4  the array that can be formed : [-1 -1 -1 n/2]
+4 if we have n =2 then we can have 
+   [firstelement  firstelement] or [secondelement secondelement] {firstelement, secondelement : first element and second element of the given array}
