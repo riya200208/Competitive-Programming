@@ -1,0 +1,39 @@
+class Solution {
+public:
+    
+    long long findMaximumNumber(long long k, int x) {
+      
+         long long left=0;
+       
+        long long sum=0;
+        long long ans=0;
+     
+    
+        for(long long i=50;i>0;i--)
+        {
+            long long rem = i-1;
+            long long temp = 1ll<<rem;//2^curr_pos -1
+            long long ritt = (i-1)/x;
+            long long tot = sum + ritt*(temp/2) + left*(temp) + left;
+
+            
+            
+            if(i%x ==0)
+            {
+              tot++;
+              left++;
+            }
+            if(tot<=k)
+            {       ans = ans|(1ll<<(i-1));
+               
+                    sum=tot-left;
+                
+            }
+            else if(i%x ==0)
+                left--;
+          
+        }
+        
+        return ans;
+    }
+};
